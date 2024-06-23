@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
+import useData from "./useData";
+import { IGenre } from "./useGenres";
 
 export interface IPlatform {
   id: number;
@@ -15,30 +14,8 @@ export interface IGame {
   parent_platforms: { platform: IPlatform }[];
   metacritic: number;
 }
-export interface IGamesApiResponse {
-  count: number;
-  results: IGame[];
-}
-const useGames = () => {
-  const [games, setGames] = useState<IGame[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-  useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    apiClient
-      .get<IGamesApiResponse>("/games", { signal: controller.signal })
-      .then((res) => {
-        setGames(res.data.results);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-        setLoading(false);
-      });
-    return () => controller.abort();
-  }, []);
-  return { games, error, isLoading };
-};
+const useGames = (selectedGenre: IGenre | null) =>
+  useData<IGame>("/games", { params: { genres: selectedGenre?.id } }, [
+    selectedGenre?.id,
+  ]);
 export default useGames;
