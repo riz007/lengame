@@ -19,7 +19,7 @@ const SearchInput = ({ onSearchInput }: Props) => {
         <Input
           ref={ref}
           borderRadius={20}
-          placeholder="Search games.."
+          placeholder="Search games..."
           focusBorderColor="green.400"
           fontSize="2xl"
           _placeholder={{ opacity: 1, color: "gray.100" }}
