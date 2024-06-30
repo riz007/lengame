@@ -1,20 +1,6 @@
-import { IGameQuery } from "../App";
+import { IGame, IGameQuery } from "../types/interface";
 import useData from "./useData";
 
-export interface IPlatform {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-export interface IGame {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: IPlatform }[];
-  metacritic: number;
-  rating_top: number;
-}
 const useGames = (gameQuery: IGameQuery) =>
   useData<IGame>(
     "/games",
