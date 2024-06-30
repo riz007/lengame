@@ -18,18 +18,6 @@ const GameGrid = ({ gameQuery }: Props) => {
         {error}
       </Text>
     );
-  if (isLoading)
-    return (
-      <Text color="white" paddingLeft={3}>
-        Loading...
-      </Text>
-    );
-  if (data.length === 0)
-    return (
-      <Text color="white" paddingLeft={3}>
-        No movies found. Please try again.
-      </Text>
-    );
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
